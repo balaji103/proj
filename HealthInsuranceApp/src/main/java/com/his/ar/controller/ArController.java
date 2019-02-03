@@ -31,6 +31,16 @@ public class ArController {
 	public ARService service;
 	
 	private static Logger logger =LoggerFactory.getLogger(ArController.class);
+	
+	/**
+	 * this method return dashboard
+	 * @return String
+	 */
+	@RequestMapping("/dashboard")
+	public String getDashboard() {
+		return "dashboard";
+	}
+	
 	/**
 	 * This method is used for return registration form with UserModel object
 	 * @param model

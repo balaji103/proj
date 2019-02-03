@@ -65,7 +65,7 @@ th, td {
 					<td><c:out value="${cw.lastName }" /></td>
 					<td><c:out value="${cw.userEmail }" /></td>
 					<td><a href="editCaseWorker?bid=${cw.userId}"><img
-							src="images/edit.png" width="20" height="20" /></a> &nbsp; &nbsp; <a
+							src="images/edit.png" width="20" height="20" title="edit"/></a> &nbsp; &nbsp; <a
 						href="deleteCaseWorker?bid=${cw.userId}"><img
 							src="images/delete.png" width="20" height="20"
 							onclick="return confirmDelete()" /> </a>
