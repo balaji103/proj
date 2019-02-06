@@ -19,7 +19,7 @@
 		$("#email").blur(function() {
 			var enteredEmail = $("#email").val();
 			$.ajax({
-				url : window.location + "/checkEmail",
+				url : "/checkEmail",
 				data : "email=" + enteredEmail,
 				success : function(result) {
 					if (result == 'DUPLICATE') {

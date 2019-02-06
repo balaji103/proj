@@ -10,7 +10,16 @@
 <title>View Case Workers</title>
 <script>
 	function confirmDelete() {
-		var status = confirm("Are you sure, you want to delete?");
+		var status = confirm("Are you sure, you want to deactivate?");
+		if (status) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
+	function confirmActivate() {
+		var status = confirm("Are you sure, you want to activate?");
 		if (status) {
 			return true;
 		} else {
@@ -41,6 +50,12 @@ th, td {
 	<%@include file="header-inner.jsp"%>
 
 	<h3>Case Worker Profiles</h3>
+	<div>${DE_SUCCESS}</div>
+	<div>${DE_FAIL}</div>
+	<div>${ACTIVE_SUCCESS}</div>
+	<div>${ACTIVE_FAIL}</div>
+	<div>${UPDATE_SUCCESS}</div>
+	<div>${UPDATE_FAIL}</div>
 
 	<table>
 		<thead>
@@ -49,6 +64,7 @@ th, td {
 				<th>First Name</th>
 				<th>Last Name</th>
 				<th>Email</th>
+				<th>Role</th>
 				<th>Action(Edit/Delete)</th>
 			</tr>
 		</thead>
@@ -64,11 +80,25 @@ th, td {
 					<td><c:out value="${cw.firstName }" /></td>
 					<td><c:out value="${cw.lastName }" /></td>
 					<td><c:out value="${cw.userEmail }" /></td>
-					<td><a href="editCaseWorker?bid=${cw.userId}"><img
-							src="images/edit.png" width="20" height="20" title="edit"/></a> &nbsp; &nbsp; <a
-						href="deleteCaseWorker?bid=${cw.userId}"><img
-							src="images/delete.png" width="20" height="20"
-							onclick="return confirmDelete()" /> </a>
+					<td><c:out value="${cw.userRole }" /></td>
+					
+					<td><a href="editCaseWorker?uid=${cw.userId}"> <img
+							src="images/edit.png" width="20" height="20" title="Edit" /></a>
+						
+						&nbsp;  &nbsp; 
+						
+						<c:if test="${cw.activeSw=='Y'}">
+							<a href="deActivateCaseWorker?uid=${cw.userId}"> <img
+								src="images/delete.png" width="20" height="20"
+								onclick="return confirmDelete()" title="Deactivate"/>
+							</a>
+						</c:if> 
+						<c:if test="${cw.activeSw=='N'}">
+							<a href="activateCaseWorker?uid=${cw.userId}"> <img
+								src="images/activate.jpg" width="20" height="20"
+								onclick="return confirmActivate()" title="Activate"/>
+							</a>
+						</c:if>
 				</tr>
 			</c:forEach>
 		</tbody>

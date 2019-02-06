@@ -51,4 +51,31 @@ public class AppConstants {
 	public static final String EMAIL_SUBJECT = "HIS Application Registration succcessfull";
 	
 	public static final Integer PAGE_SIZE = 3;
+	
+	public static final String STR_Y = "Y";
+	
+	public static final String SRT_N = "N";
+	
+	public static final String DEACTIVATE_SUCCESS = "DE_SUCCESS";
+	public static final String DEACTIVATE_SUCCESS_MSG = "Case Worker Deactivated !!! ";
+	
+	public static final String DEACTIVATE_FAIL = "DE_FAIL";
+	public static final String DEACTIVATE_FAIL_MSG = "Case Worker Deactivation fail !!! ";
+	
+	public static final String ACTIVATE_SUCCESS = "ACTIVE_SUCCESS";
+	public static final String ACTIVATE_SUCCESS_MSG = "Case Worker Activated !!! ";
+	
+	public static final String ACTIVATE_FAIL = "ACTIVE_FAIL";
+	public static final String ACTIVATE_FAIL_MSG = "Case Worker Activation fail !!! ";
+	
+	public static final String UPDATE_SUCCESS = "UPDATE_SUCCESS";
+	public static final String UPDATE_SUCCESS_MSG = "Case Worker Updated successfully !!! ";
+	
+	public static final String UPDATE_FAIL = "UPDATE_FAIL";
+	public static final String UPDATE_FAIL_MSG = "Case Worker Updation fail !!! ";
+
+	public static final boolean TRUE = true;
+	public static final boolean FALSE = false;
+
+
 }

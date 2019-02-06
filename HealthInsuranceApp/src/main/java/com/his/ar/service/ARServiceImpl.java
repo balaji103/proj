@@ -54,9 +54,6 @@ public class ARServiceImpl implements ARService {
 		entity.setActiveSw("Y");
 		entity.setCreatedBy("admin");
 		
-		//set created_date
-		entity.setCreateDate(new java.sql.Timestamp(new java.util.Date().getTime()));
-		
 		//Encrypt and save password to db table
 		entity.setUserPwd(PasswordUtil.encrypt(entity.getUserPwd()));
 
@@ -148,5 +145,45 @@ public class ARServiceImpl implements ARService {
 		return page;
 	}
 	 
+	/**
+	 * this method used to give case worker by id
+	 * @param userId
+	 * @return model
+	 */
+	public UserModel findByUserId(Integer userId) {
+		//use dao layer method for get the case worker details
+		ARUserMaster entity = arUserMasterDao.findById(userId).get();
+		
+		//convert entity to model
+		UserModel model=new UserModel();
+		BeanUtils.copyProperties(entity, model);
+		
+		//return to controller
+		return model;
+	} //findByUserId(-)
+	
+	
+	/**
+	 * this method used to perform update of case worker
+	 * @param userId
+	 * @return model
+	 */
+	public boolean update(UserModel model,boolean isEncryptPwd) {
+		//convert entity to model
+		ARUserMaster entity=new ARUserMaster();
+		BeanUtils.copyProperties(model, entity);
+		//encrypt pwd
+		if(isEncryptPwd) {
+		entity.setUserPwd(PasswordUtil.encrypt(entity.getUserPwd()));
+		}
+		//update the case worker details
+		entity = arUserMasterDao.save(entity);
 
+		//return to controller
+		if(entity!=null)
+			return true;
+		else
+			return false;
+	}//update(-)
+	
 }

@@ -54,8 +54,10 @@ public class PasswordUtil {
 	public static String decrypt(final String encrypted) {
 	    try {
 	        cipher.init(Cipher.DECRYPT_MODE, skeySpec, ivParameterSpec);
-	        final byte[] password = cipher.doFinal(encrypted.getBytes());
-	        return Base64.getEncoder().encodeToString(password);
+	        byte[] original = cipher.doFinal(Base64.getDecoder().decode(encrypted));
+	        //final byte[] password = cipher.doFinal(encrypted.getBytes());
+	       // return new String(Base64.getDecoder().decode(password));
+	        return new String(original);
 	    } catch (Exception exception) {
 	    	exception.printStackTrace();
 	    }

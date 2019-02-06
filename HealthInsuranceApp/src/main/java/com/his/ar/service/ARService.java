@@ -33,4 +33,21 @@ public interface ARService {
 	 * @return Pageable
 	 */
 	public Page findCaseWorker(Integer cpn);
+	
+	 /**
+	  * this method is used for deactivate the case worker
+	  * @param userId
+	  * @return model
+	  */
+	public UserModel findByUserId(Integer userId);
+	
+	/**
+	  * this method is used for update the case worker records
+	  * @param userId
+	  * @return model
+	  */
+	public boolean update(UserModel model,boolean isEncryptPwd);
+	
+	
+	
 }

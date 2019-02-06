@@ -10,6 +10,10 @@ import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+import org.hibernate.validator.constraints.br.TituloEleitoral;
+
 import lombok.Data;
 
 
@@ -85,12 +89,14 @@ public class ARUserMaster {
 	 * this field is specify when case worker is registered
 	 */
 	@Column(name="CRATED_DATE")
+	@CreationTimestamp
 	private Timestamp createDate;
 	
 	/**
 	 * this field is specify when case worker is updated last time
 	 */
 	@Column(name="UPDATED_DATE")
+	@UpdateTimestamp
 	private Timestamp updatedDate;
 	
 	/**
