@@ -54,10 +54,7 @@
 				required : true,
 				email : true,
 			},
-			/* userPwd : {
-				required : true,
-				minlength : 5,
-			} */
+			
 		},
 		messages : {
 			firstName : 'This field is required',
@@ -66,9 +63,7 @@
 			userDob : 'This field is required',
 			userRole : 'This field is required',
 			userEmail : 'Enter a valid email',
-			/* userPwd : {
-				minlength : 'Password must be at least 5 characters long'
-			} */
+			
 		},
 		submitHandler : function(form) {
 			form.submit();
@@ -85,12 +80,12 @@
 	
 	<h2 style="color: gray; text-align: center">EDIT CASE WORKER PROFILE</h2>
 	
-	<form:form action="editCaseWorker" method="post" modelAttribute="formModel" name="userRegForm" id="userRegForm">
+	<form:form action="editCaseWorker" method="post" modelAttribute="formModel">
 		<div align="center">
 			<table>
 				<tr>
 					<td>User Id :</td>
-					<td><form:input path="userId" id="uid" readonly="true"/></td>
+					<td><form:input path="userId" id="userId" readonly="true"/></td>
 				</tr>
 				
 				<tr>

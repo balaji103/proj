@@ -22,7 +22,7 @@ public interface ARUserMasterDAO extends JpaRepository<ARUserMaster, Serializabl
 	 * @param emailId
 	 * @return Integer
 	 */
-	  @Query("select count(*) from ARUserMaster ar where ar.userEmail=:emailId")
-	  public Integer findByUserEmail(String emailId);
+	  @Query("from ARUserMaster ar where ar.userEmail=:emailId")
+	  public ARUserMaster findByUserEmail(String emailId);
 	 
 }

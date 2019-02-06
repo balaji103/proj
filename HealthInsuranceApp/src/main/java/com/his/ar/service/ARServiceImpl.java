@@ -124,14 +124,16 @@ public class ARServiceImpl implements ARService {
 	 * this method is used to check email uniqueness in db
 	 */
 	  @Override
-	  public String checkUserMail(final String emailId) {
+	  public UserModel checkUserMail(final String emailId) {
 		  logger.info("ARServiceImpl::checkUserMail() is loaded...");
 		  //call dao layer methods
-		  Integer cnt = arUserMasterDao.findByUserEmail(emailId);
-		  //System.out.println(cnt);
-		  return(cnt!=0)?AppConstants.DUPLICATE : AppConstants.UNIQUE;
-	  
-			  
+		  ARUserMaster entity = arUserMasterDao.findByUserEmail(emailId);
+		  //convert entity object to model object
+		  UserModel model = new UserModel();
+		  if(entity!=null)
+			  BeanUtils.copyProperties(entity, model);
+		  //return to controller
+		  return model;
 	  }
 
 	  /**
@@ -181,9 +183,9 @@ public class ARServiceImpl implements ARService {
 
 		//return to controller
 		if(entity!=null)
-			return true;
+			return AppConstants.TRUE;
 		else
-			return false;
+			return AppConstants.FALSE;
 	}//update(-)
 	
 }

@@ -25,7 +25,7 @@ public interface ARService {
 	 * @param emailId
 	 * @return String
 	 */
-	public String checkUserMail(String emailId);
+	public UserModel checkUserMail(String emailId);
 	
 	/**
 	 * this method is used give the case worker list using pagination

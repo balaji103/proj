@@ -50,12 +50,8 @@ th, td {
 	<%@include file="header-inner.jsp"%>
 
 	<h3>Case Worker Profiles</h3>
-	<div>${DE_SUCCESS}</div>
-	<div>${DE_FAIL}</div>
-	<div>${ACTIVE_SUCCESS}</div>
-	<div>${ACTIVE_FAIL}</div>
-	<div>${UPDATE_SUCCESS}</div>
-	<div>${UPDATE_FAIL}</div>
+	<div style="color:green">${SUCCESS}</div>
+	<div style="color:red">${ERROR}</div>
 
 	<table>
 		<thead>
