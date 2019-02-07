@@ -24,5 +24,8 @@ public interface ARUserMasterDAO extends JpaRepository<ARUserMaster, Serializabl
 	 */
 	  @Query("from ARUserMaster ar where ar.userEmail=:emailId")
 	  public ARUserMaster findByUserEmail(String emailId);
+	  
+	  @Query("from ARUserMaster ar where ar.userEmail=:emailId and ar.userPwd=:userPwd")
+	  public ARUserMaster findUserByEmailAndPwd(String emailId,String userPwd);
 	 
 }

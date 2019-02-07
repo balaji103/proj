@@ -48,6 +48,6 @@ public interface ARService {
 	  */
 	public boolean update(UserModel model,boolean isEncryptPwd);
 	
-	
+	public UserModel loginUser(UserModel userModel);
 	
 }

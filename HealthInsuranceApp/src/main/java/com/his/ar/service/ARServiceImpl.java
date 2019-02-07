@@ -188,4 +188,24 @@ public class ARServiceImpl implements ARService {
 			return AppConstants.FALSE;
 	}//update(-)
 	
+	/**
+	 * 
+	 * @param userModel
+	 * @return
+	 */
+	public UserModel loginUser(UserModel userModel) {
+		UserModel model=null;
+		//encrypt pwd 
+		String userPwd = PasswordUtil.encrypt(userModel.getUserPwd());
+		//invoke dao layer method
+		ARUserMaster entity = arUserMasterDao.findUserByEmailAndPwd(userModel.getUserEmail(), userPwd);
+		//convert entity object to userModel object
+		if(entity!=null) {
+			model = new UserModel();
+			BeanUtils.copyProperties(entity, model);
+		}
+		//return to controller
+		return model;
+	}
+	
 }

@@ -56,10 +56,10 @@ public class AppConstants {
 	
 	public static final String STR_N = "N";
 	
-	//public static final String DEACTIVATE_SUCCESS = "DE_SUCCESS";
+	public static final String FORGOTPWD_SUCCESS_MSG = "Pwd is send to ur email, plz check";
 	public static final String DEACTIVATE_SUCCESS_MSG = "Case Worker Deactivated !!! ";
 	
-	//public static final String DEACTIVATE_FAIL = "DE_FAIL";
+	public static final String FORGOTPWD_FAIL_MSG = "invalid emailid , plz enter valid emailid";
 	public static final String DEACTIVATE_FAIL_MSG = "Case Worker Deactivation fail !!! ";
 	
 	//public static final String ACTIVATE_SUCCESS = "ACTIVE_SUCCESS";

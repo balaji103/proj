@@ -44,23 +44,26 @@ label.error {
 
 	<h3>Login Here</h3>
 
-	${error}
+	${SUCCESS}
 
-	<form:form action="login" method="POST" modelAttribute="um" name="loginForm">
+	<form:form action="login" method="POST" modelAttribute="formModel"
+		name="loginForm">
 		<table>
 			<tr>
 				<td>Email:</td>
-				<td><form:input path="email" /></td>
+				<td><form:input path="userEmail" /></td>
 			</tr>
 
 			<tr>
 				<td>Password</td>
-				<td><form:password path="pwd" /></td>
+				<td><form:password path="userPwd" /></td>
 			</tr>
 			<tr>
 				<td><input type="Submit" value="Sign In" class="button button2" /></td>
 			</tr>
 		</table>
+		
+		<a href="forgotPwd">Forgot Pwd ?</a>
 	</form:form>
 
 </body>
