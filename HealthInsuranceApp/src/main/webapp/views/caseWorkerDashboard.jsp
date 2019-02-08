@@ -10,10 +10,10 @@
 <title>Case workwr Dashboard</title>
 </head>
 <body>
-
+<div align="center">
 	<%@include file="header-inner.jsp"%>
-
+	
 	<h1>Case worker Dashboard is under construction</h1>
-
+</div>
 </body>
 </html>

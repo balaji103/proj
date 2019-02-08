@@ -28,10 +28,11 @@ label.error {
 </head>
 <body>
 
+<div align="center">
 	<h3>Login Here</h3>
 
-	${SUCCESS}
-	${ERROR}
+	<div style="color:green; text-align: center">${SUCCESS}</div>
+	<div style="color:red; text-align: center">${ERROR}</div>
 
 	<form action="forgotPwd" method="POST">
 		<table>
@@ -45,6 +46,6 @@ label.error {
 			</tr>
 		</table>
 	</form>
-
+</div>
 </body>
 </html>

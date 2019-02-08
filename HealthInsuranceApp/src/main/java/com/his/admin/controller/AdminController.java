@@ -1,4 +1,4 @@
-package com.his.ar.controller;
+package com.his.admin.controller;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,9 +19,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.his.ar.model.UserModel;
-import com.his.ar.entity.ARUserMaster;
-import com.his.ar.service.ARService;
+import com.his.admin.entity.CaseWorkerEntity;
+import com.his.admin.model.CaseWorkerModel;
+import com.his.admin.service.AdminService;
 import com.his.util.AppConstants;
 import com.his.util.PasswordUtil;
 
@@ -29,12 +29,12 @@ import com.his.util.PasswordUtil;
  * @author nit This is controller
  */
 @Controller
-public class ArController {
+public class AdminController {
 
 	@Autowired(required = true)
-	public ARService service;
+	public AdminService service;
 
-	private static Logger logger = LoggerFactory.getLogger(ArController.class);
+	private static Logger logger = LoggerFactory.getLogger(AdminController.class);
 
 	/**
 	 * this method return dashboard
@@ -56,7 +56,7 @@ public class ArController {
 	public String getRegistrationForm(Model model) {
 		logger.info("getRegistrationForm() is loaded...");
 		// create and return UserMoDel object
-		UserModel userModel = new UserModel();
+		CaseWorkerModel userModel = new CaseWorkerModel();
 		model.addAttribute("formModel", userModel);
 		// add user roles to userRole of form
 		getUserRole(model);
@@ -87,7 +87,7 @@ public class ArController {
 	 */
 
 	@RequestMapping(value = "/userReg", method = RequestMethod.POST)
-	public String registerUser(@ModelAttribute("formModel") UserModel userModel, Model model) {
+	public String registerUser(@ModelAttribute("formModel") CaseWorkerModel userModel, Model model) {
 		logger.info("registerUser() is loaded...");
 		// Use service
 		int count = service.saveUser(userModel);
@@ -112,7 +112,7 @@ public class ArController {
 	public @ResponseBody String checkUserEmail(@RequestParam("email") String email) {
 		logger.info("checkUserEmail() is loaded...");
 		System.out.println(email);
-		UserModel model = service.checkUserMail(email);
+		CaseWorkerModel model = service.checkUserMail(email);
 		logger.info("controll return to ajax function...");
 		//send response to ajax fucnction
 		return (model!=null)?AppConstants.DUPLICATE:AppConstants.UNIQUE;
@@ -127,7 +127,10 @@ public class ArController {
 	 */
 	@RequestMapping("/viewCaseWorkers")
 	public String getAllCaseWorker(@RequestParam(name = "cpn", defaultValue = "1") String cpn, Model model) {
-		List<UserModel> umList = new ArrayList();
+		List<CaseWorkerModel> umList = new ArrayList();
+		
+		System.out.println(cpn);
+		
 		int currentPageNum = 1;
 		// decide current page num
 		if (cpn != null && !cpn.equals(" ")) {
@@ -135,9 +138,9 @@ public class ArController {
 		}
 
 		// use service layer method for getting list of case worker
-		Page<ARUserMaster> page = service.findCaseWorker(currentPageNum);
-		for (ARUserMaster aum : page) {
-			UserModel um = new UserModel();
+		Page<CaseWorkerEntity> page = service.findCaseWorker(currentPageNum);
+		for (CaseWorkerEntity aum : page) {
+			CaseWorkerModel um = new CaseWorkerModel();
 			BeanUtils.copyProperties(aum, um);
 			umList.add(um);
 		}
@@ -162,15 +165,17 @@ public class ArController {
 	 */
 
 	@RequestMapping("/editCaseWorker")
-	public String showEditForm(@RequestParam("uid") String userId, Model model) {
+	public String showEditForm(@RequestParam("uid") String userId,@RequestParam("cpn") int cpn, Model model) {
+		System.out.println(cpn);
 		// invoke service class
-		UserModel userModel = service.findByUserId(Integer.parseInt(userId));
+		CaseWorkerModel userModel = service.findByUserId(Integer.parseInt(userId));
 		// decrypt pwd
 		userModel.setUserPwd(PasswordUtil.decrypt(userModel.getUserPwd()));
 		// add user roles to userRole of form
 		getUserRole(model);
 		// add model Attribute
 		model.addAttribute("formModel", userModel);
+		model.addAttribute("cpn", cpn);
 		// return lvn to controller
 		return "editCaseWorker";
 	}//showEditForm(-,-)
@@ -182,8 +187,9 @@ public class ArController {
 	 * @return String
 	 */
 	@RequestMapping(value = "/editCaseWorker", method = RequestMethod.POST)
-	public String editCaseWorker(@ModelAttribute("formModel") UserModel usermodel,
+	public String editCaseWorker(@ModelAttribute("formModel") CaseWorkerModel usermodel,
 			RedirectAttributes redirectAttributes) {
+		
 		// invoke service class
 		boolean status = service.update(usermodel, true);
 		// add model Attribute
@@ -200,9 +206,9 @@ public class ArController {
 	}//editCaseWorker(-,-)
 	
 	@RequestMapping("/activateCaseWorker")
-	public String activeCaseWorker(@RequestParam("uid") String userId,RedirectAttributes redirectAttributes) {
+	public String activeCaseWorker(@RequestParam("uid") String userId, @RequestParam("cpn") int cpn, RedirectAttributes redirectAttributes) {
 		// invoke service class for getting cw profile
-		UserModel userModel = service.findByUserId(Integer.parseInt(userId));
+		CaseWorkerModel userModel = service.findByUserId(Integer.parseInt(userId));
 		//change activeSw to N
 		userModel.setActiveSw(AppConstants.STR_Y);
 		//save cw profile
@@ -213,17 +219,17 @@ public class ArController {
 		} else {
 			redirectAttributes.addFlashAttribute(AppConstants.ERROR, AppConstants.ACTIVATE_FAIL_MSG);
 		}
-		
+				
 		//TODO:need to write send email logic 
 		
 		// return lvn to controller
-		return "redirect:viewCaseWorkers";
+		return "redirect:viewCaseWorkers?cpn="+cpn;
 	}
 	
 	@RequestMapping("/deActivateCaseWorker")
-	public String deActiveCaseWorker(@RequestParam("uid") String userId,RedirectAttributes redirectAttributes) {
+	public String deActiveCaseWorker(@RequestParam("uid") String userId, @RequestParam("cpn") int cpn, RedirectAttributes redirectAttributes) {
 		// invoke service class for getting cw profile
-		UserModel userModel = service.findByUserId(Integer.parseInt(userId));
+		CaseWorkerModel userModel = service.findByUserId(Integer.parseInt(userId));
 		//change activeSw to N
 		userModel.setActiveSw(AppConstants.STR_N);
 		//save cw profile
@@ -238,12 +244,12 @@ public class ArController {
 		//TODO:need to write send email logic 
 		
 		// return lvn to controller
-		return "redirect:viewCaseWorkers";
+		return "redirect:viewCaseWorkers?cpn="+cpn;
 	}
 	
 	@RequestMapping("/login")
 	public String getLoginForm(Model model) {
-		UserModel userModel = new UserModel();
+		CaseWorkerModel userModel = new CaseWorkerModel();
 		model.addAttribute("formModel", userModel);
 		return "login";
 	}
@@ -255,7 +261,7 @@ public class ArController {
 	 * @return
 	 */
 	@RequestMapping(value="/login",method=RequestMethod.POST)
-	public String login(@ModelAttribute("formModel") UserModel userModel ,Model model) {
+	public String login(@ModelAttribute("formModel") CaseWorkerModel userModel ,Model model) {
 		//invoke service class method
 		userModel = service.loginUser(userModel);
 		String retStr = loginAuthorize(userModel, model);
@@ -265,7 +271,7 @@ public class ArController {
 			return "login";
 	}
 
-	private String loginAuthorize(UserModel userModel, Model model) {
+	private String loginAuthorize(CaseWorkerModel userModel, Model model) {
 		//login b.logic
 		if(userModel!=null) {
 			if(AppConstants.STR_Y.equals(userModel.getActiveSw())) {
@@ -306,7 +312,7 @@ public class ArController {
 	public String processForgotPwd(Model model, HttpServletRequest req) {
 		//get value from form
 		String emailId = req.getParameter("userEmail");
-		UserModel userModel = service.checkUserMail(emailId);
+		CaseWorkerModel userModel = service.checkUserMail(emailId);
 		System.out.println(userModel);
 		if(userModel.getUserEmail()!=null) {
 			//send mail logic on successful forgot pwd

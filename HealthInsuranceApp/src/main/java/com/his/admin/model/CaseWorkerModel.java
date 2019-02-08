@@ -1,4 +1,4 @@
-package com.his.ar.model;
+package com.his.admin.model;
 
 import java.sql.Timestamp;
 
@@ -9,7 +9,7 @@ import lombok.Data;
  *         data
  */
 @Data
-public class UserModel {
+public class CaseWorkerModel {
 
 	/**
 	 * this field is specifies identity value for

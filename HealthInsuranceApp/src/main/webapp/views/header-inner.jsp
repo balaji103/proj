@@ -97,5 +97,11 @@
 			<a href="viewCaseWorkers?cpn=1">View Case Workers</a>
 		</div>
 	</div>
+	<div class="dropdown">
+		<button class="dropbtn">Logout</button>
+		<div class="dropdown-content">
+			<a href="login">Logout</a>
+		</div>	
+	</div>
 </body>
 </html>

@@ -1,4 +1,4 @@
-package com.his.ar.entity;
+package com.his.admin.entity;
 
 import java.sql.Timestamp;
 
@@ -23,16 +23,16 @@ import lombok.Data;
  * 
  */
 @Entity
-@Table(name="AR_USER_MASTER")
+@Table(name="ADMIN_CASEWORKER_MASTER")
 @Data
-public class ARUserMaster {
+public class CaseWorkerEntity {
 	
 	/**
 	 * this field is used to specify pk in db table
 	 */
 	@Id
-	@SequenceGenerator(name="AR_USER_MASTER_ID_SEQ", initialValue=1001, allocationSize=1)
-	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="AR_USER_MASTER_ID_SEQ")
+	@SequenceGenerator(name="ADMIN_CASEWORKER_MASTER_ID_SEQ", initialValue=1001, allocationSize=1)
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="ADMIN_CASEWORKER_MASTER_ID_SEQ")
 	@Column(name="USER_ID" , length=10)
 	private int userId;
 	

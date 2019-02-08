@@ -47,11 +47,14 @@ th, td {
 </head>
 <body>
 
+<div align="center">
 	<%@include file="header-inner.jsp"%>
+
 
 	<h3>Case Worker Profiles</h3>
 	<div style="color:green">${SUCCESS}</div>
 	<div style="color:red">${ERROR}</div>
+	<%-- <input type="hidden" value="${cpn}"> --%>
 
 	<table>
 		<thead>
@@ -78,19 +81,19 @@ th, td {
 					<td><c:out value="${cw.userEmail }" /></td>
 					<td><c:out value="${cw.userRole }" /></td>
 					
-					<td><a href="editCaseWorker?uid=${cw.userId}"> <img
+					<td><a href="editCaseWorker?uid=${cw.userId}&cpn=${cpn}"> <img
 							src="images/edit.png" width="20" height="20" title="Edit" /></a>
 						
 						&nbsp;  &nbsp; 
 						
 						<c:if test="${cw.activeSw=='Y'}">
-							<a href="deActivateCaseWorker?uid=${cw.userId}"> <img
+							<a href="deActivateCaseWorker?uid=${cw.userId}&cpn=${cpn}"> <img
 								src="images/delete.png" width="20" height="20"
 								onclick="return confirmDelete()" title="Deactivate"/>
 							</a>
 						</c:if> 
 						<c:if test="${cw.activeSw=='N'}">
-							<a href="activateCaseWorker?uid=${cw.userId}"> <img
+							<a href="activateCaseWorker?uid=${cw.userId}&cpn=${cpn}"> <img
 								src="images/activate.jpg" width="20" height="20"
 								onclick="return confirmActivate()" title="Activate"/>
 							</a>
@@ -120,5 +123,6 @@ th, td {
 			</c:if>
 		</tr>
 	</table>
+	</div>
 </body>
 </html>

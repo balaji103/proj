@@ -76,12 +76,14 @@
 </head>
 <body>
 	
+	<div align="center">
+	
 	<%@ include file="header-inner.jsp" %>
+	
 	
 	<h2 style="color: gray; text-align: center">EDIT CASE WORKER PROFILE</h2>
 	
 	<form:form action="editCaseWorker" method="post" modelAttribute="formModel">
-		<div align="center">
 			<table>
 				<tr>
 					<td>User Id :</td>
@@ -132,10 +134,13 @@
 				</tr>
 
 				<tr>
+					<%-- <td><a href="viewCaseWorkers?cpn=${cpn}"><button>Back</button></a></td> --%>
 					<td><input type="submit" value="Update" /></td>
 				</tr>
 			</table>
-		</div>
 	</form:form>
+	<a href="viewCaseWorkers?cpn=${cpn}"><button>Back</button></a>
+	</div>
+	
 </body>
 </html>

@@ -1,31 +1,31 @@
-package com.his.ar.service;
+package com.his.admin.service;
 
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
-import com.his.ar.model.UserModel;
+import com.his.admin.model.CaseWorkerModel;
 
 /**
  * this interface is provide b.methods
  * @author balaji
  *
  */
-public interface ARService {
+public interface AdminService {
 
 	/**
 	 * this method is used for register case worker in db
 	 * @param model
 	 * @return int
 	 */
-	public int saveUser(UserModel model);
+	public int saveUser(CaseWorkerModel model);
 	
 	/**
 	 * this methods is checked email is unique or not
 	 * @param emailId
 	 * @return String
 	 */
-	public UserModel checkUserMail(String emailId);
+	public CaseWorkerModel checkUserMail(String emailId);
 	
 	/**
 	 * this method is used give the case worker list using pagination
@@ -39,15 +39,15 @@ public interface ARService {
 	  * @param userId
 	  * @return model
 	  */
-	public UserModel findByUserId(Integer userId);
+	public CaseWorkerModel findByUserId(Integer userId);
 	
 	/**
 	  * this method is used for update the case worker records
 	  * @param userId
 	  * @return model
 	  */
-	public boolean update(UserModel model,boolean isEncryptPwd);
+	public boolean update(CaseWorkerModel model,boolean isEncryptPwd);
 	
-	public UserModel loginUser(UserModel userModel);
+	public CaseWorkerModel loginUser(CaseWorkerModel userModel);
 	
 }

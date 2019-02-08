@@ -82,6 +82,8 @@
 	
 	<%@ include file="header-inner.jsp" %>
 	
+	<div align="center">
+	
 	<h2 style="color: gray; text-align: center">CASE WORKER REGISTRATION FORM</h2>
 	<div style="color:green; text-align: center">${SUCCESS}</div>
 	<div style="color:red; text-align: center">${ERROR}</div>
@@ -133,5 +135,6 @@
 			</table>
 		</div>
 	</form:form>
+	</div>
 </body>
 </html>

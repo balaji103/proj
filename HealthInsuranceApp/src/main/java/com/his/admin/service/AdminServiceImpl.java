@@ -1,4 +1,4 @@
-package com.his.ar.service;
+package com.his.admin.service;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -14,9 +14,9 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import com.his.ar.dao.ARUserMasterDAO;
-import com.his.ar.entity.ARUserMaster;
-import com.his.ar.model.UserModel;
+import com.his.admin.dao.AdminDAO;
+import com.his.admin.entity.CaseWorkerEntity;
+import com.his.admin.model.CaseWorkerModel;
 import com.his.util.AppConstants;
 import com.his.util.EmailService;
 import com.his.util.PasswordUtil;
@@ -26,15 +26,15 @@ import com.his.util.PasswordUtil;
  * @author nit 
  */
 @Service("arService")
-public class ARServiceImpl implements ARService {
+public class AdminServiceImpl implements AdminService {
 
 	@Autowired(required = true)
-	private ARUserMasterDAO arUserMasterDao;
+	private AdminDAO arUserMasterDao;
 	
 	@Autowired(required = true)
 	private EmailService emailService;
 	
-	private Logger logger =LoggerFactory.getLogger(ARServiceImpl.class);
+	private Logger logger =LoggerFactory.getLogger(AdminServiceImpl.class);
 	
 
 	/**
@@ -43,10 +43,10 @@ public class ARServiceImpl implements ARService {
 	 * 
 	 */
 	@Override
-	public int saveUser(UserModel model) {
+	public int saveUser(CaseWorkerModel model) {
 		logger.info("ARServiceImpl::saveUser() is loaded...");
 		// Create entity class object
-		ARUserMaster entity = new ARUserMaster();
+		CaseWorkerEntity entity = new CaseWorkerEntity();
 
 		// Copy incoming model data into entity class object
 		BeanUtils.copyProperties(model, entity);
@@ -59,7 +59,7 @@ public class ARServiceImpl implements ARService {
 
 		System.out.println(entity);
 		// Save the entity class using repository
-		ARUserMaster savedEntity = arUserMasterDao.save(entity);
+		CaseWorkerEntity savedEntity = arUserMasterDao.save(entity);
 		
 		//send registration mail to user
 		if(savedEntity!=null) {
@@ -84,7 +84,7 @@ public class ARServiceImpl implements ARService {
 	 * @param um
 	 * @return String
 	 */
-	private String getEmailFormatBody(UserModel userModel) throws Exception {
+	private String getEmailFormatBody(CaseWorkerModel userModel) throws Exception {
 		logger.info("ARServiceImpl::getEmailFormatBody() is loaded...");
 		String fileName = "Registration_Email_Template.txt";
 		FileReader fileReader = new FileReader(fileName);
@@ -124,12 +124,12 @@ public class ARServiceImpl implements ARService {
 	 * this method is used to check email uniqueness in db
 	 */
 	  @Override
-	  public UserModel checkUserMail(final String emailId) {
+	  public CaseWorkerModel checkUserMail(final String emailId) {
 		  logger.info("ARServiceImpl::checkUserMail() is loaded...");
 		  //call dao layer methods
-		  ARUserMaster entity = arUserMasterDao.findByUserEmail(emailId);
+		  CaseWorkerEntity entity = arUserMasterDao.findByUserEmail(emailId);
 		  //convert entity object to model object
-		  UserModel model = new UserModel();
+		  CaseWorkerModel model = new CaseWorkerModel();
 		  if(entity!=null)
 			  BeanUtils.copyProperties(entity, model);
 		  //return to controller
@@ -143,7 +143,7 @@ public class ARServiceImpl implements ARService {
 	public Page findCaseWorker(final Integer cpn) {
 		//create Pageable class object
 		Pageable pageable = new PageRequest(cpn-1, AppConstants.PAGE_SIZE);
-		Page<ARUserMaster> page = arUserMasterDao.findAll(pageable);
+		Page<CaseWorkerEntity> page = arUserMasterDao.findAll(pageable);
 		return page;
 	}
 	 
@@ -152,12 +152,12 @@ public class ARServiceImpl implements ARService {
 	 * @param userId
 	 * @return model
 	 */
-	public UserModel findByUserId(Integer userId) {
+	public CaseWorkerModel findByUserId(Integer userId) {
 		//use dao layer method for get the case worker details
-		ARUserMaster entity = arUserMasterDao.findById(userId).get();
+		CaseWorkerEntity entity = arUserMasterDao.findById(userId).get();
 		
 		//convert entity to model
-		UserModel model=new UserModel();
+		CaseWorkerModel model=new CaseWorkerModel();
 		BeanUtils.copyProperties(entity, model);
 		
 		//return to controller
@@ -170,9 +170,9 @@ public class ARServiceImpl implements ARService {
 	 * @param userId
 	 * @return model
 	 */
-	public boolean update(UserModel model,boolean isEncryptPwd) {
+	public boolean update(CaseWorkerModel model,boolean isEncryptPwd) {
 		//convert entity to model
-		ARUserMaster entity=new ARUserMaster();
+		CaseWorkerEntity entity=new CaseWorkerEntity();
 		BeanUtils.copyProperties(model, entity);
 		//encrypt pwd
 		if(isEncryptPwd) {
@@ -193,15 +193,15 @@ public class ARServiceImpl implements ARService {
 	 * @param userModel
 	 * @return
 	 */
-	public UserModel loginUser(UserModel userModel) {
-		UserModel model=null;
+	public CaseWorkerModel loginUser(CaseWorkerModel userModel) {
+		CaseWorkerModel model=null;
 		//encrypt pwd 
 		String userPwd = PasswordUtil.encrypt(userModel.getUserPwd());
 		//invoke dao layer method
-		ARUserMaster entity = arUserMasterDao.findUserByEmailAndPwd(userModel.getUserEmail(), userPwd);
+		CaseWorkerEntity entity = arUserMasterDao.findUserByEmailAndPwd(userModel.getUserEmail(), userPwd);
 		//convert entity object to userModel object
 		if(entity!=null) {
-			model = new UserModel();
+			model = new CaseWorkerModel();
 			BeanUtils.copyProperties(entity, model);
 		}
 		//return to controller

@@ -8,17 +8,6 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Insert title here</title>
-<script
-	src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
-<script src="js/app.js"></script>
-
-<link rel="stylesheet"
-	href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-<link rel="stylesheet" href="/resources/demos/style.css">
-<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-<script
-	src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
-<script src="js/app.js"></script>
 
 <style>
 form label {
@@ -42,9 +31,10 @@ label.error {
 </head>
 <body>
 
+<div align="center">
 	<h3>Login Here</h3>
 
-	${SUCCESS}
+	<div style="color:red; text-align: center">${ERROR}</div>
 
 	<form:form action="login" method="POST" modelAttribute="formModel"
 		name="loginForm">
@@ -65,6 +55,6 @@ label.error {
 		
 		<a href="forgotPwd">Forgot Pwd ?</a>
 	</form:form>
-
+</div>
 </body>
 </html>
