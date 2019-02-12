@@ -31,9 +31,9 @@ public class ARController {
 		userModel=arService.registerUser(userModel);
 		//place msg to model scope
 		if(userModel.getRegNo()!=null)
-			model.addAttribute(AppConstants.SUCCESS,"User registered successful...");
+			model.addAttribute(AppConstants.SUCCESS,"User registered successful...plz note your Reg no. : "+userModel.getRegNo());
 		else
-			model.addAttribute(AppConstants.ERROR,"User registration Fail...");
+			model.addAttribute(AppConstants.ERROR,"User registration Fail...invalid dob/ssn no.");
 		//return lvn
 		return "userRegistration";
 	}
