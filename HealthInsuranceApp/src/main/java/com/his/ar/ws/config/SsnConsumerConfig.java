@@ -14,7 +14,7 @@ public class SsnConsumerConfig {
 		Jaxb2Marshaller marshaller = new Jaxb2Marshaller();
 		// this package must match the package in the  specified in
 		// pom.xml
-		marshaller.setContextPath("federalGov.wsdl");
+		marshaller.setContextPath("com.his.ar.bindings");
 		return marshaller;
 	}
 

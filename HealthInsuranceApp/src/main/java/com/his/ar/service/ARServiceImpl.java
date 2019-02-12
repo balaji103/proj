@@ -27,7 +27,7 @@ public class ARServiceImpl implements ARService {
 		
 		//hit federal gov project and validate ssn no is valid or not
 		IndvDetailResponse response = ssnValidatorService.validateUserBySsnAndDob(model.getDob(),Long.parseLong(ssn));
-		
+		System.out.println(response);
 		if(response!=null) {
 		//convert model to entity class obj
 		UserEntity entity = new UserEntity();
@@ -37,7 +37,9 @@ public class ARServiceImpl implements ARService {
 		//invoke DAO layer method
 		entity=arUserRegistrationDao.save(entity);
 		//convert entity to model class object
-		BeanUtils.copyProperties(entity,userModel);
+		if(entity!=null)
+			userModel = new UserModel();
+			BeanUtils.copyProperties(entity,userModel);
 		}
 		//usermodel return to controller
 		return userModel;
