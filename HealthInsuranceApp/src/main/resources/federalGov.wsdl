@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<wsdl:definitions
+	xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+	xmlns:sch="http://www.usa.gov/ssn/types"
+	xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+	xmlns:tns="http://www.usa.gov/ssn/types"
+	targetNamespace="http://www.usa.gov/ssn/types">
+	<wsdl:types>
+		<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+			elementFormDefault="qualified"
+			targetNamespace="http://www.usa.gov/ssn/types">
+			<xs:element name="IndvDetailRequest">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="dob" type="xs:string" />
+						<xs:element name="ssn" type="xs:long" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="IndvDetailResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="IndvDetail" type="tns:IndvDetailType" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:complexType name="IndvDetailType">
+				<xs:sequence>
+					<xs:element name="firstName" type="xs:string" />
+					<xs:element name="lastName" type="xs:string" />
+					<xs:element name="dob" type="xs:string" />
+					<xs:element name="ssn" type="xs:long" />
+				</xs:sequence>
+			</xs:complexType>
+		</xs:schema>
+	</wsdl:types>
+	<wsdl:message name="IndvDetailRequest">
+		<wsdl:part element="tns:IndvDetailRequest"
+			name="IndvDetailRequest">
+		</wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="IndvDetailResponse">
+		<wsdl:part element="tns:IndvDetailResponse"
+			name="IndvDetailResponse">
+		</wsdl:part>
+	</wsdl:message>
+	<wsdl:portType name="IndvDetailsPort">
+		<wsdl:operation name="IndvDetail">
+			<wsdl:input message="tns:IndvDetailRequest"
+				name="IndvDetailRequest">
+			</wsdl:input>
+			<wsdl:output message="tns:IndvDetailResponse"
+				name="IndvDetailResponse">
+			</wsdl:output>
+		</wsdl:operation>
+	</wsdl:portType>
+	<wsdl:binding name="IndvDetailsPortSoap11"
+		type="tns:IndvDetailsPort">
+		<soap:binding style="document"
+			transport="http://schemas.xmlsoap.org/soap/http" />
+		<wsdl:operation name="IndvDetail">
+			<soap:operation soapAction="" />
+			<wsdl:input name="IndvDetailRequest">
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output name="IndvDetailResponse">
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+	</wsdl:binding>
+	<wsdl:service name="IndvDetailsPortService">
+		<wsdl:port binding="tns:IndvDetailsPortSoap11"
+			name="IndvDetailsPortSoap11">
+			<soap:address
+				location="http://localhost:9090/service/ssn-details" />
+		</wsdl:port>
+	</wsdl:service>
+</wsdl:definitions>
