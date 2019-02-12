@@ -49,8 +49,8 @@
 	<div class="dropdown">
 		<button class="dropbtn">Application Registration</button>
 		<div class="dropdown-content">
-			<a href="#">Register Application</a> <a href="#">Search
-				Applications</a>
+			<a href="userRegistration">Register Application</a> 
+			<a href="#">Search Applications</a>
 		</div>
 	</div>
 

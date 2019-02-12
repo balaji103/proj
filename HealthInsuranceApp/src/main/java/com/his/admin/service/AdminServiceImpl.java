@@ -25,7 +25,7 @@ import com.his.util.PasswordUtil;
  * This is the service class it provides the b.methods
  * @author nit 
  */
-@Service("arService")
+@Service("adminService")
 public class AdminServiceImpl implements AdminService {
 
 	@Autowired(required = true)

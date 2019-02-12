@@ -61,7 +61,7 @@ public class AdminController {
 		// add user roles to userRole of form
 		getUserRole(model);
 
-		return "registration";
+		return "caseWorkerRegistration";
 	}
 
 	/**
@@ -99,7 +99,7 @@ public class AdminController {
 		// add user roles to userRole of form
 		getUserRole(model);
 		// LVN
-		return "registration";
+		return "caseWorkerRegistration";
 	}
 
 	/**
@@ -108,7 +108,7 @@ public class AdminController {
 	 * @param email
 	 * @return StringS
 	 */
-	@RequestMapping(value = "/userReg/checkEmail")
+	@RequestMapping(value = "/checkEmail")
 	public @ResponseBody String checkUserEmail(@RequestParam("email") String email) {
 		logger.info("checkUserEmail() is loaded...");
 		System.out.println(email);
