@@ -19,7 +19,7 @@ public class UserRegistrationNoGenerator implements IdentifierGenerator {
 		PreparedStatement preparedStatement=null;
 		ResultSet resultSet=null;
 		int value=0;
-		String prefix="ARN";
+		String prefix="APRN";
 		
 		try {
 			//get JDBC connection

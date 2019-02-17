@@ -18,7 +18,6 @@ public class SsnValidatorService extends WebServiceGatewaySupport{
 
 			log.info("Requesting user for validate By ssn num : " + ssn +"and DOB : "+dob);
 			return (IndvDetailResponse) getWebServiceTemplate().marshalSendAndReceive(request);
-
 		}
 
 	}

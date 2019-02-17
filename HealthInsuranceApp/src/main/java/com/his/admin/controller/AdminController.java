@@ -114,6 +114,7 @@ public class AdminController {
 		System.out.println(email);
 		CaseWorkerModel model = service.checkUserMail(email);
 		logger.info("controll return to ajax function...");
+		
 		//send response to ajax fucnction
 		return (model!=null)?AppConstants.DUPLICATE:AppConstants.UNIQUE;
 	}// checkUserEmail()
@@ -128,8 +129,6 @@ public class AdminController {
 	@RequestMapping("/viewCaseWorkers")
 	public String getAllCaseWorker(@RequestParam(name = "cpn", defaultValue = "1") String cpn, Model model) {
 		List<CaseWorkerModel> umList = new ArrayList();
-		
-		System.out.println(cpn);
 		
 		int currentPageNum = 1;
 		// decide current page num
@@ -247,7 +246,7 @@ public class AdminController {
 		return "redirect:viewCaseWorkers?cpn="+cpn;
 	}
 	
-	@RequestMapping("/login")
+	@RequestMapping("/")
 	public String getLoginForm(Model model) {
 		CaseWorkerModel userModel = new CaseWorkerModel();
 		model.addAttribute("formModel", userModel);

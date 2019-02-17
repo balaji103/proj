@@ -50,6 +50,7 @@
 		<button class="dropbtn">Application Registration</button>
 		<div class="dropdown-content">
 			<a href="userRegistration">Register Application</a> 
+			<a href="activeUsers?cpn=1&userStatus=Y">View User</a> 
 			<a href="#">Search Applications</a>
 		</div>
 	</div>

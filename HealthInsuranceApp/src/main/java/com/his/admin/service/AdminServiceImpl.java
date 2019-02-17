@@ -125,13 +125,15 @@ public class AdminServiceImpl implements AdminService {
 	 */
 	  @Override
 	  public CaseWorkerModel checkUserMail(final String emailId) {
+		  CaseWorkerModel model = null;
 		  logger.info("ARServiceImpl::checkUserMail() is loaded...");
 		  //call dao layer methods
 		  CaseWorkerEntity entity = arUserMasterDao.findByUserEmail(emailId);
 		  //convert entity object to model object
-		  CaseWorkerModel model = new CaseWorkerModel();
-		  if(entity!=null)
+		  if(entity!=null) {
+			  model = new CaseWorkerModel();
 			  BeanUtils.copyProperties(entity, model);
+		  }
 		  //return to controller
 		  return model;
 	  }
